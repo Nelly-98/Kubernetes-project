@@ -1,0 +1,9 @@
+resources:
+  - fastapi-deployment.yaml
+  - fastapi-service.yaml
+  - postgres-statefulset.yaml
+  - postgres-service.yaml
+  - pgadmin-deployment.yaml
+  - pgadmin-service.yaml
+  - hpa.yaml
+  - pvc.yaml

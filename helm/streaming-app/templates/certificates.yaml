@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: fastapi-certificate
+  namespace: default
+spec:
+  secretName: fastapi-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - kubernetes.nelly-datascientest.cloudns.be

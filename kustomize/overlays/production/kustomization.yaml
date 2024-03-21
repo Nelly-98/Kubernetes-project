@@ -1,0 +1,8 @@
+resources:
+  - ../../base
+patchesStrategicMerge:
+  - fastapi-patch.yaml
+configMapGenerator:
+  - name: fastapi-config
+    literals:
+      - DEBUG=false 

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+      - name: pgadmin
+        image: {{ .Values.pgadmin.image }}
+        ports:
+        - containerPort: 80
+        env:
+        - name: PGADMIN_DEFAULT_EMAIL
+          value: {{ .Values.pgadmin.email }}
+        - name: PGADMIN_DEFAULT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pgadmin-secret
+              key: pgadmin-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgadmin-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: {{ .Values.pgadmin.port }}
+    targetPort: 80
+  selector:
+    app: pgadmin

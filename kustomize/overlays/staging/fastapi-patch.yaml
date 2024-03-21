@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi
+spec:
+  replicas: 2  # Un nombre réduit de réplicas pour le staging
+  template:
+    spec:
+      containers:
+      - name: fastapi
+        env:
+        - name: ENVIRONMENT
+          value: "staging"
+        - name: DEBUG
+          value: "true"  # Activer le mode debug en staging

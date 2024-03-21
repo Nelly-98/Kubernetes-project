@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi
+spec:
+  replicas: 5  # Augmenter le nombre de réplicas pour la production
+  template:
+    spec:
+      containers:
+      - name: fastapi
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: DEBUG
+          value: "false"  # Désactiver le mode debug en production

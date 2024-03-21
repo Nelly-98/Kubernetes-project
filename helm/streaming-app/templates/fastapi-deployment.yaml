@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+      - name: fastapi
+        image: {{ .Values.fastapi.image }}:{{ .Values.fastapi.tag }}
+        ports:
+        - containerPort: {{ .Values.fastapi.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: {{ .Values.fastapi.port }}
+    targetPort: {{ .Values.fastapi.port }}
+  selector:
+    app: fastapi
